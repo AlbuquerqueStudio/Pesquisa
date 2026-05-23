@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#6F7F8F" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Satisfação · Albuquerque Studio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #6F7F8F;
+      --blue-dark: #5A6B7A;
+      --cream: #F5F3F0;
+      --dark: #2C2C2C;
+      --muted: #8A9097;
+      --border: #E2DDD8;
+      --white: #FFFFFF;
+    }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; }
+
+    .hero { background: var(--blue); padding: 40px 24px 36px; text-align: center; }
+    .hero-brand { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 12px; }
+    .hero-title em { font-style: italic; }
+    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; font-weight: 300; }
+
+    .container { max-width: 520px; margin: 0 auto; padding: 32px 24px 48px; }
+
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; line-height: 1.2; margin-bottom: 6px; }
+    .section-title em { font-style: italic; color: var(--blue); }
+    .section-sub { font-size: 13px; color: var(--muted); margin-bottom: 32px; line-height: 1.5; }
+
+    .field { margin-bottom: 24px; }
+    label { display: block; font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .optional { font-size: 10px; font-weight: 400; letter-spacing: 0.5px; text-transform: none; color: #C0BDB8; margin-left: 4px; }
+
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 6px; background: var(--white);
+      font-family: 'Jost', sans-serif; font-size: 14px; color: var(--dark); outline: none; transition: border-color 0.2s; appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: #C0BDB8; }
+    input:focus, select:focus, textarea:focus { border-color: var(--blue); }
+    textarea { resize: vertical; min-height: 100px; }
+    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236F7F8F' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    /* NPS */
+    .nps-wrap { display: flex; gap: 6px; flex-wrap: wrap; }
+    .nps-btn {
+      width: 44px; height: 44px; border-radius: 6px; border: 1px solid var(--border);
+      background: var(--white); font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 400;
+      color: var(--muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+    }
+    .nps-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .nps-btn.selected { background: var(--blue); border-color: var(--blue); color: var(--white); font-weight: 500; }
+    .nps-labels { display: flex; justify-content: space-between; margin-top: 8px; }
+    .nps-label { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; }
+
+    /* RADIO */
+    .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .radio-item {
+      display: flex; align-items: center; gap: 12px; padding: 13px 16px;
+      border: 1px solid var(--border); border-radius: 6px; background: var(--white);
+      cursor: pointer; transition: border-color 0.2s; font-size: 14px; color: var(--dark);
+    }
+    .radio-item:has(input:checked) { border-color: var(--blue); background: #F0F3F6; }
+    .radio-item input { accent-color: var(--blue); width: 16px; height: 16px; flex-shrink: 0; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+    .btn-submit {
+      width: 100%; padding: 16px; background: var(--blue); color: var(--white); border: none;
+      border-radius: 6px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 32px;
+    }
+    .btn-submit:hover { background: var(--blue-dark); }
+
+    .success-screen { display: none; text-align: center; padding: 60px 24px; max-width: 480px; margin: 0 auto; }
+    .success-screen.active { display: block; }
+    .success-icon { font-size: 52px; margin-bottom: 24px; }
+    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; margin-bottom: 14px; }
+    .success-title em { font-style: italic; color: var(--blue); }
+    .success-sub { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .success-wa { margin-top: 28px; padding: 14px 28px; background: var(--blue); color: var(--white); border: none; border-radius: 6px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; display: inline-block; text-decoration: none; }
+
+    @media (max-width: 400px) {
+      .hero-title { font-size: 34px; }
+      .section-title { font-size: 24px; }
+      .container { padding: 24px 20px 40px; }
+      .nps-btn { width: 38px; height: 38px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-brand">Albuquerque Studio</div>
+    <h1 class="hero-title">Sua <em>opinião</em></h1>
+    <p class="hero-sub">Leva menos de 2 minutos.<br>E significa muito para nós.</p>
+  </div>
+
+  <div class="container" id="form-container">
+
+    <h2 class="section-title">Como foi sua <em>experiência?</em></h2>
+    <p class="section-sub">Desde o primeiro contato até a entrega. Seja honesta — é assim que a gente cresce.</p>
+
+    <!-- NPS -->
+    <div class="field">
+      <label>De 0 a 10, como você avalia sua experiência com a Albuquerque Studio? *</label>
+      <div class="nps-wrap" id="nps-wrap">
+        <button class="nps-btn" onclick="selectNps(this, 0)">0</button>
+        <button class="nps-btn" onclick="selectNps(this, 1)">1</button>
+        <button class="nps-btn" onclick="selectNps(this, 2)">2</button>
+        <button class="nps-btn" onclick="selectNps(this, 3)">3</button>
+        <button class="nps-btn" onclick="selectNps(this, 4)">4</button>
+        <button class="nps-btn" onclick="selectNps(this, 5)">5</button>
+        <button class="nps-btn" onclick="selectNps(this, 6)">6</button>
+        <button class="nps-btn" onclick="selectNps(this, 7)">7</button>
+        <button class="nps-btn" onclick="selectNps(this, 8)">8</button>
+        <button class="nps-btn" onclick="selectNps(this, 9)">9</button>
+        <button class="nps-btn" onclick="selectNps(this, 10)">10</button>
+      </div>
+      <div class="nps-labels">
+        <span class="nps-label">Nada satisfeita</span>
+        <span class="nps-label">Muito satisfeita</span>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- SURPRESA -->
+    <div class="field">
+      <label>O que mais te surpreendeu no processo? <span class="optional">opcional</span></label>
+      <textarea id="surpresa" placeholder="Pode ser um detalhe pequeno ou algo que não esperava..."></textarea>
+    </div>
+
+    <!-- MELHORIA -->
+    <div class="field">
+      <label>Teve algo que poderíamos ter feito melhor? <span class="optional">opcional</span></label>
+      <textarea id="melhoria" placeholder="Sua honestidade nos ajuda a crescer..."></textarea>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- INDICAÇÃO -->
+    <div class="field">
+      <label>Você indicaria a Albuquerque Studio para uma amiga? *</label>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="indicacao" value="Com certeza!" /> Com certeza!</label>
+        <label class="radio-item"><input type="radio" name="indicacao" value="Sim, provavelmente" /> Sim, provavelmente</label>
+        <label class="radio-item"><input type="radio" name="indicacao" value="Talvez" /> Talvez</label>
+        <label class="radio-item"><input type="radio" name="indicacao" value="Não indicaria" /> Não indicaria</label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- RECADO -->
+    <div class="field">
+      <label>Quer deixar um recado para a Nati? <span class="optional">opcional</span></label>
+      <textarea id="recado" placeholder="Fique à vontade para escrever o que sentir..."></textarea>
+    </div>
+
+    <!-- NOME -->
+    <div class="field">
+      <label>Seu nome <span class="optional">opcional</span></label>
+      <input type="text" id="nome" placeholder="Para personalizarmos sua resposta" />
+    </div>
+
+    <button class="btn-submit" onclick="submitForm()">Enviar avaliação</button>
+
+  </div>
+
+  <div class="success-screen" id="success">
+    <div class="success-icon">🤍</div>
+    <h2 class="success-title">Obrigada, <em>de verdade!</em></h2>
+    <p class="success-sub">Sua opinião é o que nos faz crescer e continuar fazendo cada peça com tanta dedicação. Foi um prazer fazer parte desse momento especial.</p>
+    <a id="wa-link" class="success-wa" href="#" target="_blank">Clique aqui para finalizar →</a>
+  </div>
+
+  <script>
+    let npsValue = null;
+    const WA = '5511983291109';
+
+    function selectNps(btn, val) {
+      document.querySelectorAll('.nps-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      npsValue = val;
+    }
+
+    function submitForm() {
+      if (npsValue === null) { alert('Por favor, selecione uma nota de 0 a 10.'); return; }
+      const indicacao = document.querySelector('input[name="indicacao"]:checked');
+      if (!indicacao) { alert('Por favor, responda se indicaria a Albuquerque Studio.'); return; }
+
+      const nome = document.getElementById('nome').value;
+      const surpresa = document.getElementById('surpresa').value;
+      const melhoria = document.getElementById('melhoria').value;
+      const recado = document.getElementById('recado').value;
+
+      const line = (label, val) => val ? `${label}: ${val}\n` : '';
+
+      const msg =
+        `✦ Avaliação · Albuquerque Studio\n\n` +
+        (nome ? `Cliente: ${nome}\n\n` : '') +
+        `*Nota geral*\n${npsValue}/10\n\n` +
+        `*Indicação*\n${indicacao.value}\n\n` +
+        (surpresa ? `*O que mais surpreendeu*\n${surpresa}\n\n` : '') +
+        (melhoria ? `*O que poderia melhorar*\n${melhoria}\n\n` : '') +
+        (recado ? `*Recado para a Nati*\n${recado}\n` : '');
+
+      const url = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+      document.getElementById('wa-link').href = url;
+      document.getElementById('form-container').style.display = 'none';
+      document.getElementById('success').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => window.open(url, '_blank'), 800);
+    }
+  </script>
+
+</body>
+</html>
